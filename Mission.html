@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Today's Mission | Area 69 Survivor</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      background:
+        radial-gradient(circle at 50% 0%, #17382f 0%, transparent 35%),
+        radial-gradient(circle at 10% 80%, #10261f 0%, transparent 30%),
+        #030807;
+    }
+
+    header {
+      padding: 22px 20px;
+      border-bottom: 1px solid rgba(120,255,173,.2);
+      background: rgba(0,0,0,.35);
+    }
+
+    .topbar {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .alien {
+      font-size: 38px;
+    }
+
+    .brand h1 {
+      font-size: 24px;
+      letter-spacing: 3px;
+    }
+
+    .brand small {
+      display: block;
+      color: #78ffad;
+      letter-spacing: 2px;
+      margin-top: 3px;
+    }
+
+    .home {
+      color: #78ffad;
+      text-decoration: none;
+      border: 1px solid #78ffad;
+      padding: 9px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    main {
+      width: min(760px, 92%);
+      margin: 35px auto;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .ufo {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .title h2 {
+      font-size: clamp(34px, 8vw, 54px);
+      letter-spacing: 2px;
+    }
+
+    .title h2 span {
+      color: #78ffad;
+    }
+
+    .title p {
+      color: #aebdb6;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .lock-box {
+      margin-bottom: 24px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid rgba(255,207,102,.35);
+      background: rgba(40,30,8,.35);
+      border-radius: 16px;
+    }
+
+    .lock-label {
+      color: #ffcf66;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .countdown {
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 7px;
+    }
+
+    .game {
+      margin-bottom: 22px;
+      padding: 24px;
+      border: 1px solid rgba(120,255,173,.25);
+      border-radius: 18px;
+      background: rgba(7,20,16,.9);
+    }
+
+    .game-label {
+      color: #78ffad;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 7px;
+    }
+
+    .game h3 {
+      font-size: 23px;
+      margin-bottom: 5px;
+    }
+
+    .game-time {
+      color: #9eada6;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .question {
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .question:first-of-type {
+      border-top: none;
+    }
+
+    .points {
+      display: inline-block;
+      color: #78ffad;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .question h4 {
+      font-size: 17px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .answer {
+      border: 1px solid rgba(255,255,255,.15);
+      background: #0c1814;
+      color: white;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .answer:hover {
+      border-color: #78ffad;
+      color: #78ffad;
+    }
+
+    .answer.selected {
+      background: #78ffad;
+      border-color: #78ffad;
+      color: #06100c;
+      font-weight: bold;
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 10px;
+      padding: 17px;
+      border: 0;
+      border-radius: 12px;
+      background: #78ffad;
+      color: #06100c;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+
+    .notice {
+      margin-top: 15px;
+      color: #87958e;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 15px;
+      color: #64736c;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .answers {
+        grid-template-columns: 1fr;
+      }
+
+      .brand h1 {
+        font-size: 19px;
+      }
+
+      .game {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="topbar">
+
+    <div class="brand">
+      <div class="alien">👽</div>
+      <div>
+        <h1>AREA 69</h1>
+        <small>SURVIVOR</small>
+      </div>
+    </div>
+
+    <a class="home" href="index.html">← HOME</a>
+
+  </div>
+</header>
+
+
+<main>
+
+  <section class="title">
+    <div class="ufo">🛸</div>
+    <h2>TODAY'S <span>MISSION</span></h2>
+    <p>
+      Make your selections before Mission Control locks today's picks.
+    </p>
+  </section>
+
+
+  <section class="lock-box">
+    <div class="lock-label">🔒 MISSION LOCK</div>
+    <div class="countdown">PICKS ARE OPEN</div>
+  </section>
+
+
+  <section class="game">
+
+    <div class="game-label">GAME 1</div>
+
+    <h3>Chiefs vs Broncos</h3>
+
+    <div class="game-time">
+      Sample Mission • Picks lock at the earliest game start
+    </div>
+
+
+    <div class="question">
+
+      <div class="points">6 POINTS</div>
+
+      <h4>Both teams score 20+ points?</h4>
+
+      <div class="answers">
+        <button class="answer" onclick="selectAnswer(this)">YES</button>
+        <button class="answer" onclick="selectAnswer(this)">NO</button>
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <div class="points">6 POINTS</div>
+
+      <h4>Travis Kelce anytime touchdown scorer?</h4>
+
+      <div class="answers">
+        <button class="answer" onclick="selectAnswer(this)">YES</button>
+        <button class="answer" onclick="selectAnswer(this)">NO</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="game">
+
+    <div class="game-label">GAME 2</div>
+
+    <h3>Bonus Props</h3>
+
+    <div class="game-time">
+      Sample questions for the Area 69 mission system
+    </div>
+
+
+    <div class="question">
+
+      <div class="points">6 POINTS</div>
+
+      <h4>Jaylen Waddle anytime touchdown scorer?</h4>
+
+      <div class="answers">
+        <button class="answer" onclick="selectAnswer(this)">YES</button>
+        <button class="answer" onclick="selectAnswer(this)">NO</button>
+      </div>
+
+    </div>
+
+
+    <div class="question">
+
+      <div class="points">6 POINTS</div>
+
+      <h4>Bo Nix 250+ passing yards?</h4>
+
+      <div class="answers">
+        <button class="answer" onclick="selectAnswer(this)">YES</button>
+        <button class="answer" onclick="selectAnswer(this)">NO</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <button class="submit" onclick="submitMission()">
+    SUBMIT MISSION PICKS
+  </button>
+
+  <div class="notice">
+    TEST MODE — these buttons work visually, but picks are not being
+    saved to player accounts yet. Supabase will handle that next.
+  </div>
+
+</main>
+
+
+<footer>
+  AREA 69 SURVIVOR • MISSION CONTROL
+</footer>
+
+
+<script>
+  function selectAnswer(button) {
+    const answerGroup = button.parentElement;
+    const buttons = answerGroup.querySelectorAll(".answer");
+
+    buttons.forEach(function(item) {
+      item.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+  }
+
+  function submitMission() {
+    const selected = document.querySelectorAll(".answer.selected");
+
+    if (selected.length === 0) {
+      alert("Make at least one pick before submitting your mission.");
+      return;
+    }
+
+    alert(
+      "Mission picks selected! Player account saving will be connected next."
+    );
+  }
+</script>
+
+</body>
+</html>
